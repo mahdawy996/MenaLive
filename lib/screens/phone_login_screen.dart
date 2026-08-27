@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class PhoneLoginScreen extends StatefulWidget {
   const PhoneLoginScreen({super.key});
@@ -226,10 +227,10 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    _socialIcon(Icons.g_mobiledata, 'Google'),
-                    _socialIcon(Icons.facebook, 'Facebook'),
-                    _socialIcon(Icons.music_note, 'TikTok'),
-                    _socialIcon(Icons.camera_alt, 'Snapchat'),
+                    _socialIcon(FontAwesomeIcons.google, 'Google', const Color(0xFFDB4437)),
+                    _socialIcon(FontAwesomeIcons.facebookF, 'Facebook', const Color(0xFF1877F2)),
+                    _socialIcon(FontAwesomeIcons.tiktok, 'TikTok', Colors.white),
+                    _socialIcon(FontAwesomeIcons.snapchat, 'Snapchat', const Color(0xFFFFFC00)),
                   ],
                 ),
               ],
@@ -240,7 +241,7 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
     );
   }
 
-  Widget _socialIcon(IconData icon, String name) {
+  Widget _socialIcon(IconData icon, String name, Color iconColor) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: InkWell(
@@ -251,8 +252,8 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
         },
         child: CircleAvatar(
           radius: 31,
-          backgroundColor: inputColor,
-          child: Icon(icon, color: Colors.white),
+          backgroundColor: Colors.white,
+          child: FaIcon(icon, color: iconColor, size: 26),
         ),
       ),
     );
