@@ -251,7 +251,7 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
     );
   }
 
-  Widget _socialIcon(IconData icon, String name, Color iconColor) {
+  Widget _socialIcon(FaIconData icon, String name, Color iconColor) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: InkWell(
