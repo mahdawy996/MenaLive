@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'phone_login_screen.dart';
+import 'home_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -60,6 +61,12 @@ class LoginScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (_) => const PhoneLoginScreen()),
+                );
+              }),
+              hotspot(170, 1320, 350, 100, () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const HomeScreen()),
                 );
               }),
             ],
