@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -15,7 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
   static const pink = Color(0xFFE91E8C);
 
   final String userId = '1012153';
-  int _currentTab = 4; // الرئيسية (home) مفعّل افتراضياً
+  int _currentTab = 4;
 
   void _copyId() {
     Clipboard.setData(ClipboardData(text: userId));
@@ -50,21 +51,21 @@ class _HomeScreenState extends State<HomeScreen> {
                     _buildIconGrid(),
                     const SizedBox(height: 18),
                     _buildListItem(
-                      icon: Icons.home_filled,
+                      icon: PhosphorIconsFill.houseLine,
                       iconColor: purple,
                       title: 'غرفتي',
                       subtitle: 'إدارة غرفتي والبث المباشر',
                       onTap: () {},
                     ),
                     _buildListItem(
-                      icon: Icons.headset_mic,
+                      icon: PhosphorIconsFill.headset,
                       iconColor: Colors.lightBlueAccent,
                       title: 'خدمة العملاء',
                       subtitle: 'تواصل مع فريق الدعم',
                       onTap: () {},
                     ),
                     _buildListItem(
-                      icon: Icons.settings,
+                      icon: PhosphorIconsFill.gearSix,
                       iconColor: Colors.orangeAccent,
                       title: 'الإعدادات',
                       subtitle: 'الحساب والخصوصية والإشعارات',
@@ -96,11 +97,11 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               IconButton(
                 onPressed: () {},
-                icon: const Icon(Icons.edit_outlined, color: Colors.white),
+                icon: Icon(PhosphorIconsBold.pencilSimpleLine, color: Colors.white),
               ),
               IconButton(
                 onPressed: () {},
-                icon: const Icon(Icons.settings_outlined, color: Colors.white),
+                icon: Icon(PhosphorIconsBold.gearSix, color: Colors.white),
               ),
             ],
           ),
@@ -110,34 +111,61 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildProfileCard() {
-    return Stack(
-      clipBehavior: Clip.none,
-      children: [
-        Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              colors: [Color(0xFF241A3E), Color(0xFF120C22)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: [Color(0xFF241A3E), Color(0xFF120C22)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  Container(
+                    width: 84,
+                    height: 84,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: purple, width: 2),
+                      boxShadow: [
+                        BoxShadow(color: purple.withValues(alpha: 0.4), blurRadius: 14, spreadRadius: 1),
+                      ],
+                    ),
+                    child: const CircleAvatar(
+                      backgroundColor: Color(0xFF3A2E5C),
+                      child: Icon(Icons.person, color: Colors.white54, size: 38),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: -2,
+                    right: -2,
+                    child: Container(
+                      padding: const EdgeInsets.all(6),
+                      decoration: const BoxDecoration(color: purple, shape: BoxShape.circle),
+                      child: const Icon(Icons.camera_alt, color: Colors.white, size: 14),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(width: 14),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       children: const [
-                        Text(
-                          'توت',
-                          style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
+                        Text('توت', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
                         SizedBox(width: 6),
-                        Icon(Icons.search, color: pink, size: 20),
+                        Icon(Icons.search, color: pink, size: 18),
                       ],
                     ),
                     const SizedBox(height: 8),
@@ -150,9 +178,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: const Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text('👑', style: TextStyle(fontSize: 13)),
+                          Text('👑', style: TextStyle(fontSize: 12)),
                           SizedBox(width: 4),
-                          Text('VIP 3', style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold)),
+                          Text('VIP 3', style: TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold)),
                         ],
                       ),
                     ),
@@ -161,83 +189,50 @@ class _HomeScreenState extends State<HomeScreen> {
                       onTap: _copyId,
                       child: Row(
                         children: [
-                          Text('ID: $userId', style: const TextStyle(color: Colors.white70, fontSize: 13)),
+                          Text('ID: $userId', style: const TextStyle(color: Colors.white70, fontSize: 12)),
                           const SizedBox(width: 4),
-                          const Icon(Icons.copy, color: Colors.white54, size: 14),
+                          const Icon(Icons.copy, color: Colors.white54, size: 13),
                         ],
                       ),
-                    ),
-                    const SizedBox(height: 8),
-                    Row(
-                      children: [
-                        _statChip('18', Icons.person, Colors.pinkAccent),
-                        const SizedBox(width: 6),
-                        _statChip('25', Icons.diamond, Colors.lightBlueAccent),
-                        const SizedBox(width: 6),
-                        _statChip('Lv.27', Icons.local_fire_department, Colors.orangeAccent),
-                      ],
-                    ),
-                    const SizedBox(height: 8),
-                    Row(
-                      children: const [
-                        Flexible(
-                          child: Text(
-                            'أجعل يومك سعيداً دائماً',
-                            style: TextStyle(color: Colors.white60, fontSize: 12),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                        SizedBox(width: 4),
-                        Icon(Icons.edit, color: purple, size: 14),
-                      ],
                     ),
                   ],
                 ),
               ),
-              const SizedBox(width: 12),
-              Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  Container(
-                    width: 90,
-                    height: 90,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(color: purple, width: 2),
-                    ),
-                    child: const CircleAvatar(
-                      backgroundColor: Color(0xFF3A2E5C),
-                      child: Icon(Icons.person, color: Colors.white54, size: 40),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: -4,
-                    right: -4,
-                    child: Container(
-                      padding: const EdgeInsets.all(6),
-                      decoration: const BoxDecoration(
-                        color: purple,
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Icon(Icons.camera_alt, color: Colors.white, size: 16),
-                    ),
-                  ),
-                ],
-              ),
             ],
           ),
-        ),
-      ],
+          const SizedBox(height: 12),
+          Row(
+            children: [
+              _statChip('18', Icons.person, Colors.pinkAccent),
+              const SizedBox(width: 6),
+              _statChip('25', Icons.diamond, Colors.lightBlueAccent),
+              const SizedBox(width: 6),
+              _statChip('Lv.27', Icons.local_fire_department, Colors.orangeAccent),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Row(
+            children: const [
+              Flexible(
+                child: Text(
+                  'أجعل يومك سعيداً دائماً',
+                  style: TextStyle(color: Colors.white60, fontSize: 12),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              SizedBox(width: 4),
+              Icon(Icons.edit, color: purple, size: 14),
+            ],
+          ),
+        ],
+      ),
     );
   }
 
   Widget _statChip(String value, IconData icon, Color color) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-      decoration: BoxDecoration(
-        color: Colors.white10,
-        borderRadius: BorderRadius.circular(20),
-      ),
+      decoration: BoxDecoration(color: Colors.white10, borderRadius: BorderRadius.circular(20)),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -252,10 +247,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildFollowStatsRow() {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 16),
-      decoration: BoxDecoration(
-        color: cardBg,
-        borderRadius: BorderRadius.circular(16),
-      ),
+      decoration: BoxDecoration(color: cardBg, borderRadius: BorderRadius.circular(16)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -297,10 +289,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _currencyCard(String title, String value, IconData icon, Color color) {
     return Container(
       padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: cardBg,
-        borderRadius: BorderRadius.circular(14),
-      ),
+      decoration: BoxDecoration(color: cardBg, borderRadius: BorderRadius.circular(14)),
       child: Row(
         children: [
           CircleAvatar(backgroundColor: color.withValues(alpha: 0.2), child: Icon(icon, color: color, size: 20)),
@@ -337,7 +326,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         child: Row(
           children: [
-            const Text('🎙️', style: TextStyle(fontSize: 30)),
+            Icon(PhosphorIconsFill.microphoneStage, color: Colors.amberAccent, size: 30),
             const SizedBox(width: 10),
             const Expanded(
               child: Text(
@@ -356,13 +345,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildIconGrid() {
     final items = [
-      _GridItem('المتجر', Icons.storefront, Colors.deepOrangeAccent),
-      _GridItem('العلاقة', Icons.favorite, Colors.pinkAccent),
-      _GridItem('مستوى', Icons.auto_awesome, Colors.greenAccent),
-      _GridItem('VIP مركز', Icons.diamond, Colors.amber),
-      _GridItem('مركز الألعاب', Icons.videogame_asset, Colors.lightBlueAccent),
-      _GridItem('الحقيبة', Icons.work, Colors.purpleAccent),
-      _GridItem('الهدايا', Icons.card_giftcard, Colors.pink),
+      _GridItem('المتجر', PhosphorIconsFill.storefront, const [Color(0xFFFF8A00), Color(0xFFFF3D00)]),
+      _GridItem('العلاقة', PhosphorIconsFill.heartStraight, const [Color(0xFFFF4FA1), Color(0xFFC2185B)]),
+      _GridItem('مستوى', PhosphorIconsFill.trendUp, const [Color(0xFF43E97B), Color(0xFF0F9B6E)]),
+      _GridItem('VIP مركز', PhosphorIconsFill.crownSimple, const [Color(0xFFFFD54F), Color(0xFFFF9800)]),
+      _GridItem('مركز الألعاب', PhosphorIconsFill.gameController, const [Color(0xFF4FC3F7), Color(0xFF1976D2)]),
+      _GridItem('الحقيبة', PhosphorIconsFill.briefcase, const [Color(0xFFCE93D8), Color(0xFF7B1FA2)]),
+      _GridItem('الهدايا', PhosphorIconsFill.gift, const [Color(0xFFFF80AB), Color(0xFFD81B60)]),
     ];
 
     return GridView.builder(
@@ -379,17 +368,24 @@ class _HomeScreenState extends State<HomeScreen> {
         final item = items[index];
         return InkWell(
           onTap: () {},
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(18),
           child: Column(
             children: [
               Container(
-                width: 54,
-                height: 54,
+                width: 56,
+                height: 56,
                 decoration: BoxDecoration(
-                  color: item.color.withValues(alpha: 0.15),
-                  borderRadius: BorderRadius.circular(16),
+                  gradient: LinearGradient(
+                    colors: item.gradient,
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.circular(18),
+                  boxShadow: [
+                    BoxShadow(color: item.gradient.first.withValues(alpha: 0.4), blurRadius: 10, offset: const Offset(0, 4)),
+                  ],
                 ),
-                child: Icon(item.icon, color: item.color, size: 26),
+                child: Icon(item.icon, color: Colors.white, size: 26),
               ),
               const SizedBox(height: 6),
               Text(item.label, style: const TextStyle(color: Colors.white, fontSize: 12)),
@@ -412,13 +408,15 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Container(
         margin: const EdgeInsets.only(bottom: 10),
         padding: const EdgeInsets.all(14),
-        decoration: BoxDecoration(
-          color: cardBg,
-          borderRadius: BorderRadius.circular(14),
-        ),
+        decoration: BoxDecoration(color: cardBg, borderRadius: BorderRadius.circular(14)),
         child: Row(
           children: [
-            CircleAvatar(backgroundColor: iconColor.withValues(alpha: 0.2), child: Icon(icon, color: iconColor, size: 20)),
+            Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(color: iconColor.withValues(alpha: 0.18), borderRadius: BorderRadius.circular(12)),
+              child: Icon(icon, color: iconColor, size: 20),
+            ),
             const SizedBox(width: 12),
             Expanded(
               child: Column(
@@ -438,11 +436,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildBottomNav() {
     final items = [
-      _NavItem(Icons.person, hasDot: true),
-      _NavItem(Icons.chat_bubble_outline),
-      _NavItem(Icons.sports_esports, hasDot: true),
-      _NavItem(Icons.block),
-      _NavItem(Icons.home),
+      _NavItem(PhosphorIconsFill.userCircle, hasDot: true),
+      _NavItem(PhosphorIconsFill.chatCircleDots),
+      _NavItem(PhosphorIconsFill.gameController, hasDot: true),
+      _NavItem(PhosphorIconsFill.prohibit),
+      _NavItem(PhosphorIconsFill.houseLine),
     ];
 
     return Container(
@@ -460,11 +458,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Stack(
               clipBehavior: Clip.none,
               children: [
-                Icon(
-                  items[i].icon,
-                  color: active ? purple : Colors.white54,
-                  size: 26,
-                ),
+                Icon(items[i].icon, color: active ? purple : Colors.white54, size: 26),
                 if (items[i].hasDot)
                   Positioned(
                     top: -2,
@@ -487,8 +481,8 @@ class _HomeScreenState extends State<HomeScreen> {
 class _GridItem {
   final String label;
   final IconData icon;
-  final Color color;
-  _GridItem(this.label, this.icon, this.color);
+  final List<Color> gradient;
+  _GridItem(this.label, this.icon, this.gradient);
 }
 
 class _NavItem {
