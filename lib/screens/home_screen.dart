@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -51,22 +50,19 @@ class _HomeScreenState extends State<HomeScreen> {
                     _buildIconGrid(),
                     const SizedBox(height: 18),
                     _buildListItem(
-                      icon: PhosphorIconsFill.houseLine,
-                      iconColor: purple,
+                      asset: 'my_room.png',
                       title: 'غرفتي',
                       subtitle: 'إدارة غرفتي والبث المباشر',
                       onTap: () {},
                     ),
                     _buildListItem(
-                      icon: PhosphorIconsFill.headset,
-                      iconColor: Colors.lightBlueAccent,
+                      asset: 'customer_service.png',
                       title: 'خدمة العملاء',
                       subtitle: 'تواصل مع فريق الدعم',
                       onTap: () {},
                     ),
                     _buildListItem(
-                      icon: PhosphorIconsFill.gearSix,
-                      iconColor: Colors.orangeAccent,
+                      asset: 'room_settings.png',
                       title: 'الإعدادات',
                       subtitle: 'الحساب والخصوصية والإشعارات',
                       onTap: () {},
@@ -97,11 +93,11 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               IconButton(
                 onPressed: () {},
-                icon: Icon(PhosphorIconsBold.pencilSimpleLine, color: Colors.white),
+                icon: const Icon(Icons.edit_outlined, color: Colors.white),
               ),
               IconButton(
                 onPressed: () {},
-                icon: Icon(PhosphorIconsBold.gearSix, color: Colors.white),
+                icon: Image.asset('assets/icons/settings.png', width: 24, height: 24),
               ),
             ],
           ),
@@ -175,12 +171,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         gradient: const LinearGradient(colors: [Color(0xFFFF8A00), Color(0xFFE91E8C)]),
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      child: const Row(
+                      child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text('👑', style: TextStyle(fontSize: 12)),
-                          SizedBox(width: 4),
-                          Text('VIP 3', style: TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold)),
+                          Image.asset('assets/icons/crown_badge.png', width: 14, height: 14),
+                          const SizedBox(width: 4),
+                          const Text('VIP 3', style: TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold)),
                         ],
                       ),
                     ),
@@ -203,11 +199,11 @@ class _HomeScreenState extends State<HomeScreen> {
           const SizedBox(height: 12),
           Row(
             children: [
-              _statChip('18', Icons.person, Colors.pinkAccent),
+              _statChip('18', 'profile.png'),
               const SizedBox(width: 6),
-              _statChip('25', Icons.diamond, Colors.lightBlueAccent),
+              _statChip('25', 'diamond.png'),
               const SizedBox(width: 6),
-              _statChip('Lv.27', Icons.local_fire_department, Colors.orangeAccent),
+              _statChip('Lv.27', 'ranking.png'),
             ],
           ),
           const SizedBox(height: 8),
@@ -229,7 +225,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _statChip(String value, IconData icon, Color color) {
+  Widget _statChip(String value, String asset) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
       decoration: BoxDecoration(color: Colors.white10, borderRadius: BorderRadius.circular(20)),
@@ -238,7 +234,7 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           Text(value, style: const TextStyle(color: Colors.white, fontSize: 12)),
           const SizedBox(width: 4),
-          Icon(icon, color: color, size: 14),
+          Image.asset('assets/icons/$asset', width: 16, height: 16),
         ],
       ),
     );
@@ -251,15 +247,15 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          _followStat('4', 'المعجيون', Icons.favorite, Colors.pinkAccent),
-          _followStat('5', 'تم تابع', Icons.person_add, Colors.lightBlueAccent),
-          _followStat('3', 'الأصدقاء', Icons.people, Colors.amber),
+          _followStat('4', 'المعجيون', 'heart.png'),
+          _followStat('5', 'تم تابع', 'add_friend.png'),
+          _followStat('3', 'الأصدقاء', 'groups.png'),
         ],
       ),
     );
   }
 
-  Widget _followStat(String value, String label, IconData icon, Color color) {
+  Widget _followStat(String value, String label, String asset) {
     return Column(
       children: [
         Row(
@@ -267,7 +263,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Text(value, style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
             const SizedBox(width: 6),
-            Icon(icon, color: color, size: 20),
+            Image.asset('assets/icons/$asset', width: 20, height: 20),
           ],
         ),
         const SizedBox(height: 4),
@@ -279,20 +275,20 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildCurrencyRow() {
     return Row(
       children: [
-        Expanded(child: _currencyCard('Diamonds', '114100', Icons.diamond, Colors.lightBlueAccent)),
+        Expanded(child: _currencyCard('Diamonds', '114100', 'diamond.png')),
         const SizedBox(width: 10),
-        Expanded(child: _currencyCard('Xcoins', '0', Icons.monetization_on, Colors.amber)),
+        Expanded(child: _currencyCard('Xcoins', '0', 'gold_coin.png')),
       ],
     );
   }
 
-  Widget _currencyCard(String title, String value, IconData icon, Color color) {
+  Widget _currencyCard(String title, String value, String asset) {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(color: cardBg, borderRadius: BorderRadius.circular(14)),
       child: Row(
         children: [
-          CircleAvatar(backgroundColor: color.withValues(alpha: 0.2), child: Icon(icon, color: color, size: 20)),
+          Image.asset('assets/icons/$asset', width: 32, height: 32),
           const SizedBox(width: 10),
           Expanded(
             child: Column(
@@ -311,10 +307,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildAgencyBanner() {
     return InkWell(
-      onTap: () {},
+      onTap: () => Navigator.pushNamed(context, '/agency'),
       borderRadius: BorderRadius.circular(18),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
           gradient: const LinearGradient(
             colors: [Color(0xFF5A2E9E), Color(0xFF2E1653)],
@@ -326,7 +322,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         child: Row(
           children: [
-            Icon(PhosphorIconsFill.microphoneStage, color: Colors.amberAccent, size: 30),
+            Image.asset('assets/icons/gold_microphone.png', width: 40, height: 40),
             const SizedBox(width: 10),
             const Expanded(
               child: Text(
@@ -335,7 +331,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 textAlign: TextAlign.center,
               ),
             ),
-            const Text('👑', style: TextStyle(fontSize: 26)),
+            Image.asset('assets/icons/crown_badge.png', width: 34, height: 34),
             const Icon(Icons.chevron_left, color: Colors.white70),
           ],
         ),
@@ -345,13 +341,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildIconGrid() {
     final items = [
-      _GridItem('المتجر', PhosphorIconsFill.storefront, const [Color(0xFFFF8A00), Color(0xFFFF3D00)]),
-      _GridItem('العلاقة', PhosphorIconsFill.heartStraight, const [Color(0xFFFF4FA1), Color(0xFFC2185B)]),
-      _GridItem('مستوى', PhosphorIconsFill.trendUp, const [Color(0xFF43E97B), Color(0xFF0F9B6E)]),
-      _GridItem('VIP مركز', PhosphorIconsFill.crownSimple, const [Color(0xFFFFD54F), Color(0xFFFF9800)]),
-      _GridItem('مركز الألعاب', PhosphorIconsFill.gameController, const [Color(0xFF4FC3F7), Color(0xFF1976D2)]),
-      _GridItem('الحقيبة', PhosphorIconsFill.briefcase, const [Color(0xFFCE93D8), Color(0xFF7B1FA2)]),
-      _GridItem('الهدايا', PhosphorIconsFill.gift, const [Color(0xFFFF80AB), Color(0xFFD81B60)]),
+      _GridItem('المتجر', 'store.png'),
+      _GridItem('العلاقة', 'heart.png'),
+      _GridItem('مستوى', 'ranking.png'),
+      _GridItem('VIP مركز', 'vip.png'),
+      _GridItem('مركز الألعاب', 'games.png'),
+      _GridItem('الحقيبة', 'treasure.png'),
+      _GridItem('الهدايا', 'gifts.png'),
     ];
 
     return GridView.builder(
@@ -362,7 +358,7 @@ class _HomeScreenState extends State<HomeScreen> {
         crossAxisCount: 4,
         mainAxisSpacing: 16,
         crossAxisSpacing: 8,
-        childAspectRatio: 0.85,
+        childAspectRatio: 0.8,
       ),
       itemBuilder: (context, index) {
         final item = items[index];
@@ -371,22 +367,7 @@ class _HomeScreenState extends State<HomeScreen> {
           borderRadius: BorderRadius.circular(18),
           child: Column(
             children: [
-              Container(
-                width: 56,
-                height: 56,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: item.gradient,
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                  borderRadius: BorderRadius.circular(18),
-                  boxShadow: [
-                    BoxShadow(color: item.gradient.first.withValues(alpha: 0.4), blurRadius: 10, offset: const Offset(0, 4)),
-                  ],
-                ),
-                child: Icon(item.icon, color: Colors.white, size: 26),
-              ),
+              Image.asset('assets/icons/${item.asset}', width: 54, height: 54, fit: BoxFit.contain),
               const SizedBox(height: 6),
               Text(item.label, style: const TextStyle(color: Colors.white, fontSize: 12)),
             ],
@@ -397,8 +378,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildListItem({
-    required IconData icon,
-    required Color iconColor,
+    required String asset,
     required String title,
     required String subtitle,
     required VoidCallback onTap,
@@ -414,8 +394,9 @@ class _HomeScreenState extends State<HomeScreen> {
             Container(
               width: 40,
               height: 40,
-              decoration: BoxDecoration(color: iconColor.withValues(alpha: 0.18), borderRadius: BorderRadius.circular(12)),
-              child: Icon(icon, color: iconColor, size: 20),
+              decoration: BoxDecoration(color: Colors.white10, borderRadius: BorderRadius.circular(12)),
+              padding: const EdgeInsets.all(8),
+              child: Image.asset('assets/icons/$asset', fit: BoxFit.contain),
             ),
             const SizedBox(width: 12),
             Expanded(
@@ -436,11 +417,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildBottomNav() {
     final items = [
-      _NavItem(PhosphorIconsFill.userCircle, hasDot: true),
-      _NavItem(PhosphorIconsFill.chatCircleDots),
-      _NavItem(PhosphorIconsFill.gameController, hasDot: true),
-      _NavItem(PhosphorIconsFill.prohibit),
-      _NavItem(PhosphorIconsFill.houseLine),
+      _NavItem('profile.png', hasDot: true),
+      _NavItem('messages.png'),
+      _NavItem('games.png', hasDot: true),
+      _NavItem('lock_room.png'),
+      _NavItem('home.png'),
     ];
 
     return Container(
@@ -458,7 +439,10 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Stack(
               clipBehavior: Clip.none,
               children: [
-                Icon(items[i].icon, color: active ? purple : Colors.white54, size: 26),
+                Opacity(
+                  opacity: active ? 1.0 : 0.55,
+                  child: Image.asset('assets/icons/${items[i].asset}', width: 26, height: 26),
+                ),
                 if (items[i].hasDot)
                   Positioned(
                     top: -2,
@@ -480,13 +464,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
 class _GridItem {
   final String label;
-  final IconData icon;
-  final List<Color> gradient;
-  _GridItem(this.label, this.icon, this.gradient);
+  final String asset;
+  _GridItem(this.label, this.asset);
 }
 
 class _NavItem {
-  final IconData icon;
+  final String asset;
   final bool hasDot;
-  _NavItem(this.icon, {this.hasDot = false});
+  _NavItem(this.asset, {this.hasDot = false});
 }
