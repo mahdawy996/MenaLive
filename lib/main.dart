@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/login_screen.dart';
+import 'screens/debug_menu_screen.dart';
 import 'screens/agency_dashboard_screen.dart';
 import 'screens/host_dashboard_screen.dart';
 import 'screens/target_management_screen.dart';
@@ -17,7 +17,7 @@ class MenaLiveApp extends StatelessWidget {
       title: 'Mena Live',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(useMaterial3: true),
-      home: const LoginScreen(),
+      home: const DebugMenuScreen(),
       routes: {
         '/agency': (_) => const AgencyDashboardScreen(),
         '/host': (_) => const HostDashboardScreen(),
